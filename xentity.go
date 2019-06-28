@@ -1,7 +1,8 @@
 package xormt
 
 import (
-		"github.com/go-xorm/xorm"
+	"github.com/gin-gonic/gin"
+	"github.com/go-xorm/xorm"
 )
 
 /**
@@ -19,3 +20,27 @@ type TenantDBInfo struct {
 	DriverName string		// 驱动名称
 	db         *xorm.Engine	// 数据库连接对象
 }
+
+/**
+ * @brief: 多租户上下文
+ *		集成gin.Context
+ */
+type MultiTenantContext struct {
+	*gin.Context
+	DB *xorm.Engine
+}
+
+/**
+ * @brief: 多租户处理函数
+ */
+type MultiTenantHandlerFunc func(*MultiTenantContext)
+
+/**
+ * @brief: 租户数据库提供者
+ */
+type TenantDBProvider func()[]*TenantDBInfo
+
+/**
+ * @brief: 住户id解析器
+ */
+type TenantIdResolver func(*gin.Context)string

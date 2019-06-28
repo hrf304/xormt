@@ -28,3 +28,11 @@ func (efe* ErrFieldEmpty)Error()string{
 		return fmt.Sprintf("the field %s is empty or nil", efe.field)
 	}
 }
+
+type ErrDeaultTendarMissing struct{
+
+}
+
+func (efe* ErrDeaultTendarMissing)Error()string {
+	return "the default tendar is missing"
+}
